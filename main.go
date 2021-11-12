@@ -70,13 +70,18 @@ var ConnTimeout time.Duration
 func main() {
 	// Parse arguments
 	{
-		flag.StringVar(&ConfigFileName, "config", ConfigFileName, "Config file path")
-		flag.IntVar(&Verbose, "verbose", 1, "Verbose level: 0->None, 1->Typical errors, 2->Connection flood 3->Timeout drops 4->Everything")
+		flag.StringVar(&ConfigFileName, "config", ConfigFileName, "Configuration file path")
+		flag.IntVar(&Verbose, "verbose", 1, "Verbose level: \n"+
+			"0: None\n"+
+			"1: Typical errors\n"+
+			"2: Connection flood\n"+
+			"3: Timeout drops\n"+
+			"4: Everything\n")
 		help := flag.Bool("h", false, "Show help")
 		flag.Parse()
 
 		if *help {
-			fmt.Print("GoPortForward")
+			fmt.Println("GoPortForward")
 			fmt.Println("Program by Publyo")
 			fmt.Println("Source at https://github.com/Taulim/GoPortForward")
 			fmt.Printf("Version %s\n", Version)
