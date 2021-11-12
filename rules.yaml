@@ -1,0 +1,9 @@
+Timeout: -1
+Rules:
+  - Listen: 5080
+    Forward: 172.17.0.1:8000
+    Simultaneous: 10
+  
+  - Name: PortNumber2
+    Listen: 5088
+    Forward: 172.17.0.1:8888
