@@ -234,7 +234,7 @@ func copyIO(src, dest net.Conn, index int, closeCb func()) {
 
 	if err != nil {
 		if strings.Contains(err.Error(), "i/o timeout") {
-			logVerbose(3, "Connection timed out from", src.RemoteAddr(), "to", dest.RemoteAddr())
+			logVerbose(3, fmt.Sprintf("Connection timed out from %s to %s", src.RemoteAddr(), dest.RemoteAddr()))
 		} else if strings.HasPrefix(err.Error(), "cannot set timeout for") {
 			if strings.HasSuffix(err.Error(), "use of closed network connection") {
 				logVerbose(4, err.Error())
@@ -242,12 +242,12 @@ func copyIO(src, dest net.Conn, index int, closeCb func()) {
 				logVerbose(1, err.Error())
 			}
 		} else {
-			logVerbose(4, "Error on copyBuffer:", err.Error())
+			logVerbose(4, fmt.Sprintf("Error on copyBuffer: %s", err.Error()))
 		}
 	}
 
 	closeCb()
-	logVerbose(4, "Closed connection from", src.RemoteAddr())
+	logVerbose(4, fmt.Sprintf("Closed connection from %s", src.RemoteAddr()))
 }
 
 func copyBuffer(dst, src net.Conn) (written int64, err error) {
@@ -289,8 +289,8 @@ func copyBuffer(dst, src net.Conn) (written int64, err error) {
 	return written, err
 }
 
-func logVerbose(level int, msg ...interface{}) {
+func logVerbose(level int, msg string) {
 	if Verbose >= level {
-		log.Println(msg...)
+		log.Println(msg)
 	}
 }
